@@ -15439,7 +15439,6 @@ img {
 
 .slider-container {
   position: relative;
-  max-height: 320px;
 }
 
 .row_carousel {
@@ -15474,6 +15473,10 @@ img {
   box-shadow: 0 0 40px 5px lightgray;
 }
 
+.row_newItems {
+  height: 100%;
+}
+
 /* ================================================== */
 
 /* R E S P O N S I V E */
@@ -15499,6 +15502,26 @@ img {
     min-width: 95%;
   }
 }
+
+/* -------------------------------------------------- 
+    design for 980px - 992px
+    /* ================================================== */
+
+@media (min-width: 980px) and (max-width: 992px) {
+  .nft__item_wrap {
+    height: 480px;
+  }
+}
+
+/* -------------------------------------------------- 
+    design for 768px - 979px
+    /* ================================================== */
+
+    @media (max-width: 767px) {
+      .nft__item_wrap {
+        height: 480px;
+      }
+    }
 
 /* -------------------------------------------------- 
     design for 768px
