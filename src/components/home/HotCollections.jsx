@@ -19,7 +19,7 @@ const HotCollections = () => {
       <div key={nft.id} className="px-2">
         <div className="nft_coll">
           <div className="nft_wrap">
-            <Link to="/item-details">
+            <Link to={`/item-details/${nft.nftId}`}>
               <img src={nft.nftImage} className="lazy img-fluid" alt="" />
             </Link>
           </div>
@@ -40,7 +40,7 @@ const HotCollections = () => {
     ));
   }
 
-  function renderSkeletonSlides() {
+  function renderSkeletonHotCollections() {
     return new Array(4).fill(0).map((_, index) => (
       <div className="px-2" key={index}>
         <div className="nft_coll">
@@ -80,7 +80,7 @@ const HotCollections = () => {
           {hotCollections.length > 0 ? (
             <Carousel collection={renderHotCollections()} />
           ) : (
-            <Carousel collection={renderSkeletonSlides()} />
+            <Carousel collection={renderSkeletonHotCollections()} />
           )}
         </div>
       </div>
