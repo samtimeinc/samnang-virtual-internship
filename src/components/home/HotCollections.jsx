@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Carousel from "../UI/Carousel.jsx";
 import Skeleton from "../UI/Skeleton.jsx";
+import UserImagePlaceholder from "../UI/UserImagePlaceholder.jsx";
 
 const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([]);
@@ -24,8 +25,12 @@ const HotCollections = () => {
             </Link>
           </div>
           <div className="nft_coll_pp">
-            <Link to="/author">
-              <img className="lazy pp-coll" src={nft.authorImage} alt="" />
+            <Link to={`/author/${nft.authorId}`}>
+              {nft.authorImage ? (
+                <img className="lazy pp-coll" src={nft.authorImage} alt="" />
+              ) : (
+                <UserImagePlaceholder authorName={nft.authorName} />
+              )}
             </Link>
             <i className="fa fa-check"></i>
           </div>

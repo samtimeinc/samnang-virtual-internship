@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import Carousel from "../UI/Carousel";
 import CountdownDisplay from "../UI/CountdownDisplay";
 import Skeleton from "../UI/Skeleton";
+import UserImagePlaceholder from "../UI/UserImagePlaceholder";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -21,12 +20,16 @@ const NewItems = () => {
         <div className="nft__item">
           <div className="author_list_pp">
             <Link
-              to="/author"
+              to={`/author/${nft.authorId}`}
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Creator: Monica Lucas"
             >
-              <img className="lazy" src={nft.authorImage} alt="" />
+              {nft.authorImage ? (
+                <img className="lazy" src={nft.authorImage} alt="" />
+              ) : (
+                <UserImagePlaceholder authorName={nft.authorName} />
+              )}
               <i className="fa fa-check"></i>
             </Link>
           </div>
