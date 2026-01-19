@@ -15509,7 +15509,7 @@ img {
 
 @media (min-width: 980px) and (max-width: 992px) {
   .nft__item_wrap {
-    height: 480px;
+    height: 460px;
   }
 }
 
@@ -16745,6 +16745,19 @@ img {
   100% {
     transform: translateX(100%);
   }
+}
+
+.author-image-placeholder {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
 }
 
 .nft-image {
