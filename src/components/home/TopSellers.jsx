@@ -42,15 +42,7 @@ const TopSellers = () => {
   function renderSkeletonTopSellers() {
     return new Array(12).fill(0).map((_, index) => (
       <li key={index}>
-        <div className="author_list_pp">
-          <Skeleton width="50px" height="50px" borderRadius="50%" />
-        </div>
-        <div className="author_list_info">
-          <Skeleton width="80%" height="20px" />
-          <span>
-            <Skeleton width="50px" height="20px" />
-          </span>
-        </div>
+        <Skeleton width="100%" height="50px"borderRadius="10px" />
       </li>
     ))
   }
