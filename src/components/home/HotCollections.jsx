@@ -7,6 +7,7 @@ import UserImagePlaceholder from "../UI/UserImagePlaceholder.jsx";
 
 const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([]);
+  const [windowWidth, setwinddowWidth] = useState(window.innerWidth);
 
   async function fetchHotCollections() {
     const { data } = await axios.get(
@@ -46,29 +47,21 @@ const HotCollections = () => {
   }
 
   function renderSkeletonHotCollections() {
+    let skeletonHeight;
+    if (windowWidth < 992) {
+      skeletonHeight = "300px";
+    } else {
+      skeletonHeight = "265px"
+    }
     return new Array(4).fill(0).map((_, index) => (
       <div className="px-2" key={index}>
-        <div className="nft_coll">
-          <div className="nft_wrap">
-            <Skeleton width="100%" height="200px" />
-          </div>
-          <div className="nft_coll_pp">
-            <Skeleton width="60px" height="60px" borderRadius="50%" />
-          </div>
-          <div className="nft_coll_info">
-            <div>
-              <Skeleton width="100px" height="20px" />
-            </div>
-            <div>
-              <Skeleton width="70px" height="20px" />
-            </div>
-          </div>
-        </div>
+        <Skeleton width="100%" height={skeletonHeight} borderRadius="20px" />
       </div>
     ));
   }
 
   useEffect(() => {
+    setwinddowWidth(window.innerWidth);
     fetchHotCollections();
   }, []);
 

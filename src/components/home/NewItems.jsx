@@ -8,6 +8,7 @@ import UserImagePlaceholder from "../UI/UserImagePlaceholder";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   async function fetchNewItems() {
     const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
@@ -81,51 +82,24 @@ const NewItems = () => {
   }
 
   function renderSkeletonNewItems() {
+    let skeletonHeight;
+    if ((windowWidth < 992 && windowWidth > 979) || 
+        (windowWidth < 767)) {
+      skeletonHeight = "550px"
+    } else {
+      skeletonHeight = "440px"
+    }
+
     return new Array(4).fill(0).map((_, index) => (
       <div className="px-2" key={index}>
-        <div className="nft__item">
-          <div className="author_list_pp">
-            <Skeleton width="50px" height="50px" borderRadius="50%" />
-          </div>
-          <div className="nft__item_wrap">
-            <div className="nft__item_extra">
-              <div className="nft__item_buttons">
-                <button>Buy Now</button>
-                <div className="nft__item_share">
-                  <h4>Share</h4>
-                  <a href="" target="_blank" rel="noreferrer">
-                    <i className="fa fa-facebook fa-lg"></i>
-                  </a>
-                  <a href="" target="_blank" rel="noreferrer">
-                    <i className="fa fa-twitter fa-lg"></i>
-                  </a>
-                  <a href="">
-                    <i className="fa fa-envelope fa-lg"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <Skeleton width="280px" height="200px" />
-          </div>
-          <div className="nft__item_info">
-            <Skeleton width="120px" height="20px" />
-            <div className="nft__item_price">
-              <Skeleton width="80px" height="20px" />
-            </div>
-            <div className="nft__item_like">
-              <i className="fa fa-heart"></i>
-              <span>
-                <Skeleton width="15px" height="15px" />
-              </span>
-            </div>
-          </div>
-        </div>
+        <Skeleton width="100%" height={skeletonHeight} borderRadius="20px" />
       </div>
     ))
   }
 
   useEffect(() => {
-    fetchNewItems()
+    setWindowWidth(window.innerWidth);
+    fetchNewItems();
   }, []);
 
   return (
