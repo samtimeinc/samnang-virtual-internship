@@ -29,7 +29,7 @@ const ExploreItems = () => {
           <div className="nft__item">
             <div className="author_list_pp">
               <Link
-                to="/author"
+                to={`/author/${item.authorId}`}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
@@ -81,8 +81,8 @@ const ExploreItems = () => {
 
   function renderSkeletonItems() {
     let skeletonHeight;
-    if ((windowWidth < 992 && windowWidth > 979) || 
-        (windowWidth < 767)) {
+    if ((windowWidth < 992 && windowWidth > 978) || 
+        (windowWidth < 768)) {
       skeletonHeight = "550px"
     } else {
       skeletonHeight = "440px"

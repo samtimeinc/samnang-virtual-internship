@@ -83,8 +83,8 @@ const NewItems = () => {
 
   function renderSkeletonNewItems() {
     let skeletonHeight;
-    if ((windowWidth < 992 && windowWidth > 979) || 
-        (windowWidth < 767)) {
+    if ((windowWidth < 992 && windowWidth > 978) || 
+        (windowWidth < 768)) {
       skeletonHeight = "550px"
     } else {
       skeletonHeight = "440px"
