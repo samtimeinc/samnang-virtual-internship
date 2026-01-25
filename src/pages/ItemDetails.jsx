@@ -48,7 +48,7 @@ const ItemDetails = () => {
                     {item.ownerImage ? (
                       <img className="lazy" src={item.ownerImage} alt="" />
                     ) : (
-                      <UserImagePlaceholder />
+                      <UserImagePlaceholder authorName={item.ownerName} />
                     )}
                     <i className="fa fa-check"></i>
                   </Link>
@@ -71,7 +71,7 @@ const ItemDetails = () => {
                     {item.creatorImage ? (
                       <img className="lazy" src={item.creatorImage} alt="" />
                     ) : (
-                      <UserImagePlaceholder />
+                      <UserImagePlaceholder authorName={item.creatorName} />
                     )}
                     <i className="fa fa-check"></i>
                   </Link>

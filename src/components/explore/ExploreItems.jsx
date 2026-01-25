@@ -36,7 +36,7 @@ const ExploreItems = () => {
                 {item.authorImage ? (
                   <img className="lazy" src={item.authorImage} alt="" />
                 ) : (
-                  <UserImagePlaceholder  />
+                  <UserImagePlaceholder authorName={item.authorName} />
                 )} 
                 <i className="fa fa-check"></i>
               </Link>

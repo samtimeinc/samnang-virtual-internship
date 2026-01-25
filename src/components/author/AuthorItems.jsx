@@ -16,7 +16,7 @@ const AuthorItems = ( { collection, image, authorID, windowWidth } ) => {
               <i className="fa fa-check"></i>
             </Link>
           ) : (
-            <UserImagePlaceholder />
+            <UserImagePlaceholder authorName={nft.authorName} />
           )}
         </div>
         <div className="nft__item_wrap">

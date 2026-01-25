@@ -25,7 +25,7 @@ const Author = () => {
         {author.authorImage ? (
           <img src={author.authorImage} alt="" />
         ) : (
-          <UserImagePlaceholder width="150px" height="150px" />
+          <UserImagePlaceholder authorName={authorName} width="150px" height="150px" />
         )}
         <i className="fa fa-check"></i>
           <div className="profile_name">
