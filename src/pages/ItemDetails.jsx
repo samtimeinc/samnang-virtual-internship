@@ -9,11 +9,6 @@ const ItemDetails = () => {
   const { itemID } = useParams();
   const [item, setItem] = useState({});
 
-  async function fetchItemDetails() {
-    const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${itemID}`);
-    setItem(data || {});
-  }
-
   function renderItemDetails() {
     return  <div className="row">
       <div className="col-md-6 text-center">
@@ -148,6 +143,10 @@ const ItemDetails = () => {
   }
 
   useEffect(() => {
+    async function fetchItemDetails() {
+      const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${itemID}`);
+      setItem(data || {});
+    }
     fetchItemDetails();
   }, [itemID])
   

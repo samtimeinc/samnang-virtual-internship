@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
@@ -7,16 +7,10 @@ import Skeleton from "../components/UI/Skeleton";
 import UserImagePlaceholder from "../components/UI/UserImagePlaceholder";
 
 const Author = () => {
-  const params = useParams();
+  const { authorID } = useParams();
   const [author, setAuthor] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [follow, setFollow] = useState(false);
-
-  const fetchAuthorDetails = useCallback(async () => {
-    const { authorID } = params;
-    const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorID}`);
-    setAuthor(data || {});
-  }, [params])
 
   function renderAuthor() {
     return <div className="d_profile de-flex">
@@ -25,7 +19,7 @@ const Author = () => {
         {author.authorImage ? (
           <img src={author.authorImage} alt="" />
         ) : (
-          <UserImagePlaceholder authorName={authorName} width="150px" height="150px" />
+          <UserImagePlaceholder authorName={author.authorName} width="150px" height="150px" />
         )}
         <i className="fa fa-check"></i>
           <div className="profile_name">
@@ -100,8 +94,12 @@ const Author = () => {
   }, []);
 
   useEffect(() => {
+    async function fetchAuthorDetails() {
+      const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorID}`);
+      setAuthor(data || {});
+    }
     fetchAuthorDetails();
-  }, [fetchAuthorDetails]);
+  }, [authorID]);
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);

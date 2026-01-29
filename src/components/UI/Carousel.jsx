@@ -63,7 +63,11 @@ function Carousel({ collection }) {
   };
 
   return (
-    <div className="slider-container" style={{ padding: "0 15px" }}>
+    <div 
+      data-aos="fade-in" 
+      data-aos-delay="100"
+      className="slider-container" 
+      style={{ padding: "0 15px" }} >
       <button onClick={() => prevSlide()} className="carousel-btn chevronLeft">
         <ChevronLeft size={24} />
       </button>

@@ -7,14 +7,12 @@ import UserImagePlaceholder from "../UI/UserImagePlaceholder";
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
 
-  async function fetchTopSellers() {
-    const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers");
-    setTopSellers(data || []);
-  }
-
   function renderTopSellers() {
     return topSellers.map((seller) => (
-      <li key={seller.id}>
+      <li 
+        key={seller.id}
+        data-aos="fade-in" 
+        data-aos-delay="100" >
         <div className="author_list_pp">
           <Link to={`/author/${seller.authorId}`}>
             {seller.authorImage ? (
@@ -48,6 +46,10 @@ const TopSellers = () => {
   }
 
   useEffect(() => {
+    async function fetchTopSellers() {
+      const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers");
+      setTopSellers(data || []);
+    }
     fetchTopSellers();
   },[])
 
