@@ -13,9 +13,10 @@ const Author = () => {
   const [follow, setFollow] = useState(false);
 
   function renderAuthor() {
-    return <div className="d_profile de-flex">
+    return <div data-aos="fade-in" data-aos-delay="100" className="d_profile de-flex">
     <div className="de-flex-col">
-      <div className="profile_avatar">
+      <div 
+        className="profile_avatar">
         {author.authorImage ? (
           <img src={author.authorImage} alt="" />
         ) : (
@@ -38,7 +39,8 @@ const Author = () => {
     </div>
     <div className="profile_follow de-flex">
       <div className="de-flex-col">
-          <div className="profile_follower">
+          <div
+            className="profile_follower">
             {follow ? (
               author.followers + 1
             ) : (
@@ -46,7 +48,10 @@ const Author = () => {
             ) } 
             <span> followers</span>
             </div>
-        <Link to="#" className="btn-main" onClick={handleFollow}>
+        <Link 
+          to="#" 
+          className="btn-main" 
+          onClick={handleFollow}>
           {follow ? (
             <span>Unfollow</span>
           ) : (

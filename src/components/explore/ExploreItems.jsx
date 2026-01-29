@@ -22,6 +22,8 @@ const ExploreItems = () => {
   function renderItems() {
     return items.slice(0, visibleItems).map((item) => (
       <div
+          data-aos="fade-in" 
+          data-aos-delay="100"
           key={item.id}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
