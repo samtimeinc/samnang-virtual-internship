@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
@@ -7,25 +7,20 @@ import Skeleton from "../components/UI/Skeleton";
 import UserImagePlaceholder from "../components/UI/UserImagePlaceholder";
 
 const Author = () => {
-  const params = useParams();
+  const { authorID } = useParams();
   const [author, setAuthor] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [follow, setFollow] = useState(false);
 
-  const fetchAuthorDetails = useCallback(async () => {
-    const { authorID } = params;
-    const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorID}`);
-    setAuthor(data || {});
-  }, [params])
-
   function renderAuthor() {
-    return <div className="d_profile de-flex">
+    return <div data-aos="fade-in" data-aos-delay="100" className="d_profile de-flex">
     <div className="de-flex-col">
-      <div className="profile_avatar">
+      <div 
+        className="profile_avatar">
         {author.authorImage ? (
           <img src={author.authorImage} alt="" />
         ) : (
-          <UserImagePlaceholder authorName={authorName} width="150px" height="150px" />
+          <UserImagePlaceholder authorName={author.authorName} width="150px" height="150px" />
         )}
         <i className="fa fa-check"></i>
           <div className="profile_name">
@@ -44,7 +39,8 @@ const Author = () => {
     </div>
     <div className="profile_follow de-flex">
       <div className="de-flex-col">
-          <div className="profile_follower">
+          <div
+            className="profile_follower">
             {follow ? (
               author.followers + 1
             ) : (
@@ -52,7 +48,10 @@ const Author = () => {
             ) } 
             <span> followers</span>
             </div>
-        <Link to="#" className="btn-main" onClick={handleFollow}>
+        <Link 
+          to="#" 
+          className="btn-main" 
+          onClick={handleFollow}>
           {follow ? (
             <span>Unfollow</span>
           ) : (
@@ -100,8 +99,12 @@ const Author = () => {
   }, []);
 
   useEffect(() => {
+    async function fetchAuthorDetails() {
+      const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorID}`);
+      setAuthor(data || {});
+    }
     fetchAuthorDetails();
-  }, [fetchAuthorDetails]);
+  }, [authorID]);
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);

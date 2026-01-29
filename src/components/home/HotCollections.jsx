@@ -9,13 +9,6 @@ const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([]);
   const [windowWidth, setwinddowWidth] = useState(window.innerWidth);
 
-  async function fetchHotCollections() {
-    const { data } = await axios.get(
-      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-    );
-    setHotCollections(data || []);
-  }
-
   function renderHotCollections() {
     return hotCollections.map((nft) => (
       <div key={nft.id} className="px-2">
@@ -61,6 +54,12 @@ const HotCollections = () => {
   }
 
   useEffect(() => {
+    async function fetchHotCollections() {
+      const { data } = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+      );
+      setHotCollections(data || []);
+    }
     setwinddowWidth(window.innerWidth);
     fetchHotCollections();
   }, []);

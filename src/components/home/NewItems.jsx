@@ -10,11 +10,6 @@ const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-  async function fetchNewItems() {
-    const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
-    setNewItems(data || []);
-  }
-
   function renderNewItems() {
     return newItems.map((nft) => (
       <div className="px-2" key={nft.id}>
@@ -89,7 +84,6 @@ const NewItems = () => {
     } else {
       skeletonHeight = "440px"
     }
-
     return new Array(4).fill(0).map((_, index) => (
       <div className="px-2" key={index}>
         <Skeleton width="100%" height={skeletonHeight} borderRadius="20px" />
@@ -98,6 +92,10 @@ const NewItems = () => {
   }
 
   useEffect(() => {
+    async function fetchNewItems() {
+      const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
+      setNewItems(data || []);
+    }
     setWindowWidth(window.innerWidth);
     fetchNewItems();
   }, []);
