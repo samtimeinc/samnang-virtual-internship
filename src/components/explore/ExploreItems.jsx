@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Skeleton from "../UI/Skeleton";
 import UserImagePlaceholder from "../UI/UserImagePlaceholder";
 import CountdownDisplay from "../UI/CountdownDisplay";
 
-const ExploreItems = () => {
-  const [items, setItems] = useState([]);
+const ExploreItems = ({ windowWidth, items, onFilterChange }) => {
   const [visibleItems, setVisibleItems] = useState(8);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  async function fetchItems(filter = "") {
-    let api = "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
-    if (filter !== "") {
-      api += `?filter=${filter}`
-    }
-    const { data } = await axios.get(api);
-    setItems(data || [])
+  function handleLoadMore() {
+    setVisibleItems(prevVisible => prevVisible + 4);
   }
 
   function renderItems() {
@@ -51,13 +43,13 @@ const ExploreItems = () => {
                   <button>Buy Now</button>
                   <div className="nft__item_share">
                     <h4>Share</h4>
-                    <a href="" target="_blank" rel="noreferrer">
+                    <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
                       <i className="fa fa-facebook fa-lg"></i>
                     </a>
-                    <a href="" target="_blank" rel="noreferrer">
+                    <a href="https://www.x.com" target="_blank" rel="noreferrer">
                       <i className="fa fa-twitter fa-lg"></i>
                     </a>
-                    <a href="">
+                    <a href="mailto:recipient@example.com">
                       <i className="fa fa-envelope fa-lg"></i>
                     </a>
                   </div>
@@ -99,29 +91,15 @@ const ExploreItems = () => {
       </div>
   ))}
 
-  function handleFilter(event) {
-    let filter = event.target.value;
-    setVisibleItems(8)
-    setItems([])
-    fetchItems(filter);
-  }
-
-  function handleLoadMore() {
-    setVisibleItems(prevVisible => prevVisible + 4);
-  }
-
-  useEffect(() => {
-    fetchItems();
-  }, [])
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, [])
-
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="" onChange={handleFilter} >
+        <select 
+          id="filter-items" 
+          defaultValue="" 
+          onChange={(event) => {
+            setVisibleItems(8);
+            onFilterChange(event.target.value)}} >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
