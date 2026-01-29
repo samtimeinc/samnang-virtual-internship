@@ -12,6 +12,10 @@ const Author = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [follow, setFollow] = useState(false);
 
+  function handleFollow() {
+    setFollow(!follow);
+  }
+
   function renderAuthor() {
     return <div data-aos="fade-in" data-aos-delay="100" className="d_profile de-flex">
     <div className="de-flex-col">
@@ -90,14 +94,6 @@ const Author = () => {
     </div>
   }
 
-  function handleFollow() {
-    setFollow(!follow);
-  }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   useEffect(() => {
     async function fetchAuthorDetails() {
       const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorID}`);
@@ -107,6 +103,7 @@ const Author = () => {
   }, [authorID]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setWindowWidth(window.innerWidth);
   }, [])
 

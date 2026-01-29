@@ -22,7 +22,6 @@ function App() {
       debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
       throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
       
-      // offset: 10, // offset (in px) from the original trigger point
       easing: 'ease', // default easing for AOS animations
       mirror: false, // whether elements should animate out while scrolling past them
       duration: 1250,

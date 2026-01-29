@@ -99,7 +99,7 @@ const ItemDetails = () => {
         <div className="item_info">
           <Skeleton width="350px" height="46px" />
           <div>
-              <Skeleton width="1500px" height="30px" />
+              <Skeleton width="150px" height="30px" />
           </div>
           <div>
             <Skeleton width="100%" height="78px" />
